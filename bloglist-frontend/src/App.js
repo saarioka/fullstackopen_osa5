@@ -76,6 +76,13 @@ const App = () => {
       <button type="submit">login</button>
     </form>
   )
+
+  const logoutUser = (event) => {
+    event.preventDefault()
+    window.localStorage.removeItem('loggedBlogappUser')
+    setUser(null)
+  }
+
 /*
   const blogForm = () => (
     <form onSubmit={addBlog}>
@@ -100,7 +107,7 @@ const App = () => {
     <div>
       <h2>blogs</h2>
       <p>{user.name} logged in</p>
-      <button onClick={window.localStorage.removeItem('loggedBlogappUser')}>log out</button>
+      <button onClick={ logoutUser }>log out</button>
       {blogs.map(blog =>
         <Blog key={blog.id} blog={blog} />
       )}
