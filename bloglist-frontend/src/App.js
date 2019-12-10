@@ -6,11 +6,9 @@ import LoginForm from './components/LoginForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
 
-
 const App = () => {
   const [blogs, setBlogs] = useState([])
   const [blogVisible, setBlogVisible] = useState(false)
-  const [loginVisible, setLoginVisible] = useState(false)
 
   const [newBlogTitle, setNewBlogTitle] = useState('')
   const [newBlogAuthor, setNewBlogAuthor] = useState('')
@@ -40,7 +38,6 @@ const App = () => {
   const handleLogin = async (event) => {
     event.preventDefault()
     try {
-      console.log("i tri")
       const user = await loginService.login({
         username, password,
       })
@@ -54,7 +51,6 @@ const App = () => {
         'loggedBlogappUser', JSON.stringify(user)
       )
     } catch (exception) {
-      console.log("fug")
       setErrorMessage('wrong credentials')
       setTimeout(() => {
         setErrorMessage(null)
