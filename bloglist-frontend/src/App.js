@@ -93,17 +93,6 @@ const App = () => {
     setUser(null)
   }
 
-/*
-  const blogForm = () => (
-    <form onSubmit={addBlog}>
-      <input
-        value={newBlog}
-        onChange={handleBlogChange}
-      />
-      <button type="submit">save</button>
-    </form>
-  )
-*/
   const Notification = ({ message }) => {
     if (message === null) {
       return null
@@ -162,8 +151,8 @@ const App = () => {
     <div>
       <Notification message={errorMessage} />
       <h2>blogs</h2>
-      { user ?
-        <div>
+      { user
+        ?<div>
           <p>{user.name} logged in</p>
           <button onClick={ logoutUser }>log out</button>
         </div>

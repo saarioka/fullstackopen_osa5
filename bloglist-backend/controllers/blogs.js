@@ -43,7 +43,7 @@ router.post('/', async (request, response) => {
 })
 
 router.put('/:id', async (request, response) => {
-  const { author, title, url,likes } = request.body
+  const { author, title, url, likes } = request.body
 
   const blog = {
     author, title, url, likes,

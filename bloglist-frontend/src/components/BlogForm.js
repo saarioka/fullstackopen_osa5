@@ -16,7 +16,7 @@ const BlogForm = ({
         <input
           type="text"
           value={newBlogTitle}
-          onChange={handleNewBlogAuthorChange}
+          onChange={handleNewBlogTitleChange}
         />
       </div>
       <div>
@@ -24,7 +24,7 @@ const BlogForm = ({
         <input
           type="text"
           value={newBlogAuthor}
-          onChange={handleNewBlogTitleChange}
+          onChange={handleNewBlogAuthorChange}
         />
       </div>
       <div>

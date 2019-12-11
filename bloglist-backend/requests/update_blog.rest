@@ -1,9 +1,10 @@
-PUT http://localhost:3003/api/blogs/5d6e7cfb67d0e32b2c46d6dc
+PUT http://localhost:3003/api/blogs/5df0a3ba775ba922a492af9c
 Content-Type: application/json
 
 {
   "title": "uusi otsikko",
   "author": "uusi tekijä",
   "url": "urli",
-  "likes": "9000"
+  "likes": "9001",
+  "user" : "5df0a28d775ba922a492af99"
 }
