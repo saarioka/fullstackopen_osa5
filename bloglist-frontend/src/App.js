@@ -22,6 +22,7 @@ const App = () => {
   useEffect(() => {
     blogService
       .getAll().then(initialBlogs => {
+        initialBlogs = initialBlogs.sort((a, b) => (!b.likes || a.likes > b.likes) ? -1 : 1)
         setBlogs(initialBlogs)
       })
   }, [])
@@ -61,18 +62,17 @@ const App = () => {
   const handleBlogCreation = async (event) => {
     event.preventDefault()
     try {
-      const blog = await blogService.create({
-        title: newBlogTitle,
-        author: newBlogAuthor,
-        url: newBlogUrl
-      })
-
+      const blog = await blogService
+        .create({
+          title: newBlogTitle,
+          author: newBlogAuthor,
+          url: newBlogUrl
+        })
       blogService.setToken(user.token)
       setNewBlogAuthor('')
       setNewBlogTitle('')
       setNewBlogUrl('')
-
-      blogs.concat(blog)
+      setBlogs(blogs.concat(blog))
 
       setErrorMessage(`${newBlogTitle} by ${newBlogAuthor} added`)
       setTimeout(() => {
