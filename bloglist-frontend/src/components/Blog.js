@@ -45,11 +45,9 @@ const Blog = ({ blog, user, refreshBlogs}) => {
       }
     )
     refreshBlogs()
-    console.log("tykkää ja jaa")
   }
 
   const handleRemove = (blog) => {
-
     if (window.confirm(`remove blog ${blog.name} by ${blog.author}?`)) {
       blogService.remove(blog.id, user.token)
     }
