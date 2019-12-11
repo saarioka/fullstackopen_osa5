@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import blogService from '../services/blogs'
 
-const Blog = ({ blog }) => {
+const Blog = ({ blog, user, refreshBlogs}) => {
   const [infoVisible, setInfoVisible] = useState(false)
 
   const mainStyle = {
@@ -21,6 +21,14 @@ const Blog = ({ blog }) => {
     display: infoVisible ? '' : 'none'
   }
 
+  const isUser = () => {
+    return user && user.username === blog.user.username
+  }
+
+  const removeButtonStyle = {
+    display: isUser() ? '' : 'none'
+  }
+
   const toggleVisible = () => {
     setInfoVisible(!infoVisible)
   }
@@ -36,6 +44,15 @@ const Blog = ({ blog }) => {
         url: blog.url
       }
     )
+    refreshBlogs()
+    console.log("tykkää ja jaa")
+  }
+
+  const handleRemove = (blog) => {
+
+    if (window.confirm(`remove blog ${blog.name} by ${blog.author}?`)) {
+      blogService.remove(blog.id, user.token)
+    }
   }
 
   return(
@@ -47,6 +64,7 @@ const Blog = ({ blog }) => {
         {blog.url} <br/>
         {blog.likes} likes <button type="button" onClick={() => handleLike(blog)}>like</button> <br/>
         added by {blog.user.name}
+        <button type="button" style={removeButtonStyle} onClick={() => handleRemove(blog)}>remove</button>
       </div>
     </div>
   )}

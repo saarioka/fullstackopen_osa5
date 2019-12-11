@@ -93,6 +93,10 @@ const App = () => {
     setUser(null)
   }
 
+  const refreshBlogs = () => {
+    setBlogs(blogs.sort((a, b) => (!b.likes || a.likes > b.likes) ? -1 : 1))
+  }
+
   const Notification = ({ message }) => {
     if (message === null) {
       return null
@@ -160,7 +164,7 @@ const App = () => {
       <h2>create new</h2>
       {blogForm()}
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <Blog key={blog.id} blog={blog} user={user} refreshBlogs={refreshBlogs}/>
       )}
     </div>
   )
