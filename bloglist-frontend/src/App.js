@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 import './App.css'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
@@ -123,6 +124,14 @@ const App = () => {
     )
   }
 
+  LoginForm.propTypes = {
+    handleSubmit: PropTypes.func.isRequired,
+    handleUsernameChange: PropTypes.func.isRequired,
+    handlePasswordChange: PropTypes.func.isRequired,
+    username: PropTypes.string.isRequired,
+    password: PropTypes.string.isRequired
+  }
+
   const blogForm = () => {
     const hideWhenVisible = { display: blogVisible ? 'none' : '' }
     const showWhenVisible = { display: blogVisible ? '' : 'none' }
@@ -149,6 +158,18 @@ const App = () => {
         </div>
       </div>
     )
+  }
+
+  BlogForm.propTypes = {
+    newBlogAuthor: PropTypes.string.isRequired,
+    newBlogTitle: PropTypes.string.isRequired,
+    newBlogUrl: PropTypes.string.isRequired,
+    username: PropTypes.func.isRequired,
+    password: PropTypes.func.isRequired,
+    handleNewBlogAuthorChange: PropTypes.func.isRequired,
+    handleNewBlogTitleChange: PropTypes.func.isRequired,
+    handleNewBlogUrlChange: PropTypes.func.isRequired,
+    handleBlogCreation: PropTypes.func.isRequired
   }
 
   return (
