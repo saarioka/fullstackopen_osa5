@@ -48,7 +48,7 @@ const Blog = ({ blog, user, refreshBlogs}) => {
   }
 
   const handleRemove = (blog) => {
-    if (window.confirm(`remove blog ${blog.name} by ${blog.author}?`)) {
+    if (window.confirm(`remove blog ${blog.title} by ${blog.author}?`)) {
       blogService.remove(blog.id, user.token)
     }
   }
