@@ -6,6 +6,7 @@ import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import SimpleBlog from './components/SimpleBlog'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -185,7 +186,7 @@ const App = () => {
       <h2>create new</h2>
       {blogForm()}
       {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} user={user} refreshBlogs={refreshBlogs}/>
+        <SimpleBlog key={blog.id} blog={blog} user={user} refreshBlogs={refreshBlogs}/>
       )}
     </div>
   )
