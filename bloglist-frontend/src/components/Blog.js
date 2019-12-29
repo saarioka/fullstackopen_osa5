@@ -55,10 +55,10 @@ const Blog = ({ blog, user, refreshBlogs}) => {
 
   return(
     <div>
-      <div style={mainStyle} onClick={toggleVisible}>
+      <div style={mainStyle} onClick={toggleVisible} className="info">
         {blog.title} {blog.author}
       </div>
-      <div style={infoStyle}>
+      <div style={infoStyle} className="togglableContent">
         {blog.url} <br/>
         {blog.likes} likes <button type="button" onClick={() => handleLike(blog)}>like</button> <br/>
         added by {blog.user.name}
