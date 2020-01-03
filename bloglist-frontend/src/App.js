@@ -115,11 +115,16 @@ const App = () => {
   }
 
   const loginForm = () => {
+    // eslint-disable-next-line no-unused-vars
+    let reset, name, pass
+
+    ({ reset, ...name } = username);
+    ({ reset, ...pass } = password)
     return(
       <div>
         <LoginForm
-          username={username}
-          password={password}
+          username={name}
+          password={pass}
           handleSubmit={handleLogin}
         />
       </div>
@@ -136,6 +141,13 @@ const App = () => {
     const hideWhenVisible = { display: blogVisible ? 'none' : '' }
     const showWhenVisible = { display: blogVisible ? '' : 'none' }
 
+    // eslint-disable-next-line no-unused-vars
+    let reset, title, author, url
+
+    ({ reset, ...title } = newBlogTitle);
+    ({ reset, ...author } = newBlogAuthor);
+    ({ reset, ...url } = newBlogUrl)
+
     return(
       <div>
         <div style={hideWhenVisible}>
@@ -144,9 +156,9 @@ const App = () => {
         <div style={showWhenVisible}>
           {user ?
             <BlogForm
-              newBlogAuthor={newBlogAuthor}
-              newBlogTitle={newBlogTitle}
-              newBlogUrl={newBlogUrl}
+              newBlogAuthor={author}
+              newBlogTitle={title}
+              newBlogUrl={url}
               handleBlogCreation={handleBlogCreation}
             />
             : null
