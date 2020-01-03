@@ -50,7 +50,12 @@ const blogs = [
 ]
 
 const getAll = () => {
+  console.log("asd")
   return Promise.resolve(blogs)
 }
 
-export default { getAll }
+const setToken = () => {
+  /* TypeError: _blogs.default.setToken is not a function */
+}
+
+export default { getAll, setToken }

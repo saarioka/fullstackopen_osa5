@@ -6,6 +6,7 @@ import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
+import { useField } from './hooks'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -16,8 +17,8 @@ const App = () => {
   const [newBlogUrl, setNewBlogUrl] = useState('')
 
   const [errorMessage, setErrorMessage] = useState(null)
-  const [username, setUsername] = useState('')
-  const [password, setPassword] = useState('')
+  const username = useField({ type: 'text', name: 'username' })
+  const password = useField({ type: 'password', name: 'password' })
   const [user, setUser] = useState(null)
 
   useEffect(() => {
@@ -31,6 +32,7 @@ const App = () => {
 
   useEffect(() => {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogappUser')
+    console.log(loggedUserJSON)
     if (loggedUserJSON) {
       const user = JSON.parse(loggedUserJSON)
       setUser(user)
@@ -42,13 +44,12 @@ const App = () => {
     event.preventDefault()
     try {
       const user = await loginService.login({
-        username, password,
+        username: username.value,
+        password: password.value,
       })
 
       blogService.setToken(user.token)
       setUser(user)
-      setUsername('')
-      setPassword('')
 
       window.localStorage.setItem(
         'loggedBlogappUser', JSON.stringify(user)
@@ -117,8 +118,6 @@ const App = () => {
         <LoginForm
           username={username}
           password={password}
-          handleUsernameChange={({ target }) => setUsername(target.value)}
-          handlePasswordChange={({ target }) => setPassword(target.value)}
           handleSubmit={handleLogin}
         />
       </div>
@@ -172,11 +171,11 @@ const App = () => {
   }
 
   if (user){
-    console.log("asdasdasdasd")
+    console.log('user is logged in')
   }
 
   return (
-    <div className="info">
+    <div>
       <Notification message={errorMessage} />
       <h2>blogs</h2>
       {user

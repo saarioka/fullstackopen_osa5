@@ -2,8 +2,6 @@ import React from 'react'
 
 const LoginForm = ({
   handleSubmit,
-  handleUsernameChange,
-  handlePasswordChange,
   username,
   password
 }) => {
@@ -15,16 +13,13 @@ const LoginForm = ({
         <div>
           username
           <input
-            value={username}
-            onChange={handleUsernameChange}
+            {...username}
           />
         </div>
         <div>
           password
           <input
-            type="password"
-            value={password}
-            onChange={handlePasswordChange}
+            {...password} type="password"
           />
         </div>
         <button type="submit">login</button>
