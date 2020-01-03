@@ -50,7 +50,6 @@ const blogs = [
 ]
 
 const getAll = () => {
-  console.log("asd")
   return Promise.resolve(blogs)
 }
 

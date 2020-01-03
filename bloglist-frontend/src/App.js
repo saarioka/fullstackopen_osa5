@@ -12,9 +12,9 @@ const App = () => {
   const [blogs, setBlogs] = useState([])
   const [blogVisible, setBlogVisible] = useState(false)
 
-  const [newBlogTitle, setNewBlogTitle] = useState('')
-  const [newBlogAuthor, setNewBlogAuthor] = useState('')
-  const [newBlogUrl, setNewBlogUrl] = useState('')
+  const newBlogTitle = useField({ type: 'text', name: 'title' })
+  const newBlogAuthor = useField({ type: 'text', name: 'author' })
+  const newBlogUrl = useField({ type: 'text', name: 'blogURL' })
 
   const [errorMessage, setErrorMessage] = useState(null)
   const username = useField({ type: 'text', name: 'username' })
@@ -50,6 +50,8 @@ const App = () => {
 
       blogService.setToken(user.token)
       setUser(user)
+      username.reset()
+      password.reset()
 
       window.localStorage.setItem(
         'loggedBlogappUser', JSON.stringify(user)
@@ -67,17 +69,17 @@ const App = () => {
     try {
       const blog = await blogService
         .create({
-          title: newBlogTitle,
-          author: newBlogAuthor,
-          url: newBlogUrl
+          title: newBlogTitle.value,
+          author: newBlogAuthor.value,
+          url: newBlogUrl.value
         })
       blogService.setToken(user.token)
-      setNewBlogAuthor('')
-      setNewBlogTitle('')
-      setNewBlogUrl('')
+      newBlogAuthor.reset()
+      newBlogTitle.reset()
+      newBlogUrl.reset()
       setBlogs(blogs.concat(blog))
 
-      setErrorMessage(`${newBlogTitle} by ${newBlogAuthor} added`)
+      setErrorMessage(`${newBlogTitle.value} by ${newBlogAuthor.value} added`)
       setTimeout(() => {
         setErrorMessage(null)
       }, 5000)
@@ -126,10 +128,8 @@ const App = () => {
 
   LoginForm.propTypes = {
     handleSubmit: PropTypes.func.isRequired,
-    handleUsernameChange: PropTypes.func.isRequired,
-    handlePasswordChange: PropTypes.func.isRequired,
-    username: PropTypes.string.isRequired,
-    password: PropTypes.string.isRequired
+    username: PropTypes.object.isRequired,
+    password: PropTypes.object.isRequired
   }
 
   const blogForm = () => {
@@ -147,9 +147,6 @@ const App = () => {
               newBlogAuthor={newBlogAuthor}
               newBlogTitle={newBlogTitle}
               newBlogUrl={newBlogUrl}
-              handleNewBlogAuthorChange={({ target }) => setNewBlogAuthor(target.value)}
-              handleNewBlogTitleChange={({ target }) => setNewBlogTitle(target.value)}
-              handleNewBlogUrlChange={({ target }) => setNewBlogUrl(target.value)}
               handleBlogCreation={handleBlogCreation}
             />
             : null
@@ -161,12 +158,9 @@ const App = () => {
   }
 
   BlogForm.propTypes = {
-    newBlogAuthor: PropTypes.string.isRequired,
-    newBlogTitle: PropTypes.string.isRequired,
-    newBlogUrl: PropTypes.string.isRequired,
-    handleNewBlogAuthorChange: PropTypes.func.isRequired,
-    handleNewBlogTitleChange: PropTypes.func.isRequired,
-    handleNewBlogUrlChange: PropTypes.func.isRequired,
+    newBlogAuthor: PropTypes.object.isRequired,
+    newBlogTitle: PropTypes.object.isRequired,
+    newBlogUrl: PropTypes.object.isRequired,
     handleBlogCreation: PropTypes.func.isRequired
   }
 
