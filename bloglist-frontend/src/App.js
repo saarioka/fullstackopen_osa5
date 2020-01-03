@@ -6,7 +6,7 @@ import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
-import SimpleBlog from './components/SimpleBlog'
+//import SimpleBlog from './components/SimpleBlog'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -22,8 +22,9 @@ const App = () => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    blogService
-      .getAll().then(initialBlogs => {
+      blogService
+      .getAll()
+      .then(initialBlogs => {
         initialBlogs = initialBlogs.sort((a, b) => (!b.likes || a.likes > b.likes) ? -1 : 1)
         setBlogs(initialBlogs)
       })
@@ -153,7 +154,7 @@ const App = () => {
               handleNewBlogUrlChange={({ target }) => setNewBlogUrl(target.value)}
               handleBlogCreation={handleBlogCreation}
             />
-            : loginForm()
+            : null
           }
           <button onClick={() => setBlogVisible(false)}>cancel</button>
         </div>
@@ -165,8 +166,6 @@ const App = () => {
     newBlogAuthor: PropTypes.string.isRequired,
     newBlogTitle: PropTypes.string.isRequired,
     newBlogUrl: PropTypes.string.isRequired,
-    username: PropTypes.func.isRequired,
-    password: PropTypes.func.isRequired,
     handleNewBlogAuthorChange: PropTypes.func.isRequired,
     handleNewBlogTitleChange: PropTypes.func.isRequired,
     handleNewBlogUrlChange: PropTypes.func.isRequired,
@@ -177,17 +176,17 @@ const App = () => {
     <div>
       <Notification message={errorMessage} />
       <h2>blogs</h2>
-      { user
-        ?<div>
+      {user
+        ?<div className="info">
           <p>{user.name} logged in</p>
           <button onClick={ logoutUser }>log out</button>
+          <h2>create new</h2>
+          {blogForm()}
+          {blogs.map(blog =>
+            <Blog key={blog.id} blog={blog} user={user} refreshBlogs={refreshBlogs}/>
+          )}
         </div>
-        : null}
-      <h2>create new</h2>
-      {blogForm()}
-      {blogs.map(blog =>
-        <SimpleBlog key={blog.id} blog={blog} user={user} refreshBlogs={refreshBlogs}/>
-      )}
+        : loginForm()}
     </div>
   )
 }
