@@ -6,7 +6,6 @@ import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import blogService from './services/blogs'
 import loginService from './services/login'
-//import SimpleBlog from './components/SimpleBlog'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -22,7 +21,7 @@ const App = () => {
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-      blogService
+    blogService
       .getAll()
       .then(initialBlogs => {
         initialBlogs = initialBlogs.sort((a, b) => (!b.likes || a.likes > b.likes) ? -1 : 1)
@@ -172,8 +171,12 @@ const App = () => {
     handleBlogCreation: PropTypes.func.isRequired
   }
 
+  if (user){
+    console.log("asdasdasdasd")
+  }
+
   return (
-    <div>
+    <div className="info">
       <Notification message={errorMessage} />
       <h2>blogs</h2>
       {user

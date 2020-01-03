@@ -28,22 +28,21 @@ test('renders content', () => {
 })
 
 test('clicking the button calls event handler twice', async () => {
-    const blog = {
-        title: 'Component testing is done with react-testing-library',
-        author: 'Albert Einstein',
-        likes: '123'
-      }
-  
-    const mockHandler = jest.fn()
-  
-    const { getByText } = render(
-      <SimpleBlog blog={blog} onClick={mockHandler} />
-    )
-  
-    const button = getByText('like')
-    fireEvent.click(button)
-    fireEvent.click(button)
-  
-    expect(mockHandler.mock.calls.length).toBe(2)
-  })
-  
+  const blog = {
+    title: 'Component testing is done with react-testing-library',
+    author: 'Albert Einstein',
+    likes: '123'
+  }
+
+  const mockHandler = jest.fn()
+
+  const { getByText } = render(
+    <SimpleBlog blog={blog} onClick={mockHandler} />
+  )
+
+  const button = getByText('like')
+  fireEvent.click(button)
+  fireEvent.click(button)
+
+  expect(mockHandler.mock.calls.length).toBe(2)
+})

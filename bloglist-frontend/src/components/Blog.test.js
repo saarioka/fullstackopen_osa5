@@ -8,8 +8,8 @@ afterEach(cleanup)
 test('oletusarvoisesti blogista on näkyvissä ainoastaan nimi ja kirjoittaja', () => {
   const blog = {
     user: {
-      "username": "knimi",
-      "name": "nimi"
+      'username': 'knimi',
+      'name': 'nimi'
     },
     title: 'Component testing is done with react-testing-library',
     author: 'Albert Einstein',
@@ -32,13 +32,13 @@ test('oletusarvoisesti blogista on näkyvissä ainoastaan nimi ja kirjoittaja', 
   )
 })
 
- describe('oletusarvoisesti blogista on näkyvissä ainoastaan nimi ja kirjoittaja', () => {
+describe('oletusarvoisesti blogista on näkyvissä ainoastaan nimi ja kirjoittaja', () => {
   let component
 
   const blog = {
     user: {
-      "username": "knimi",
-      "name": "nimi"
+      'username': 'knimi',
+      'name': 'nimi'
     },
     title: 'Component testing is done with react-testing-library',
     author: 'Albert Einstein',
